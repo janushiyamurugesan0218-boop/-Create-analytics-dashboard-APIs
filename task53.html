@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.chart-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Analytics Dashboard</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Users</h3>
+            <h2 id="users">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Sales</h3>
+            <h2 id="sales">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Orders</h3>
+            <h2 id="orders">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Revenue</h3>
+            <h2 id="revenue">0</h2>
+        </div>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="analyticsChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+const analyticsData = {
+    users: 1250,
+    sales: 870,
+    orders: 540,
+    revenue: 25000
+};
+
+document.getElementById("users").textContent = analyticsData.users;
+document.getElementById("sales").textContent = analyticsData.sales;
+document.getElementById("orders").textContent = analyticsData.orders;
+document.getElementById("revenue").textContent = "$" + analyticsData.revenue;
+
+const ctx = document.getElementById("analyticsChart");
+
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: ["Users", "Sales", "Orders", "Revenue"],
+        datasets: [{
+            label: "Analytics Data",
+            data: [
+                analyticsData.users,
+                analyticsData.sales,
+                analyticsData.orders,
+                analyticsData.revenue
+            ]
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+</script>
+
+</body>
+</html>
